@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ymlpodcreate
+  labels:
+# Degisken olarak dusunebiliriz. Birden fazla pod ayni label adini alabilir.
+# Podlari secerken kullaniriz
+    type: back-end
+    app: user-service
+  annotations:
+    owner: "Taha Yasin CINAR"
+    type: "backend-service"
+    create: "13.10.2022 09:18"
+    iletisim: "0 555 555 55 55"
+    email: "yasin@gmail.com"
+spec:
+  containers:
+  - name: ymlpodcreate
+    image:  tycinar42/dockerdeneme:v001
+    ports:
+      - containerPort: 9090
+

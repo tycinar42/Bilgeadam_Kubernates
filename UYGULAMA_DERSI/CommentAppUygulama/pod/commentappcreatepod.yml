@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: commentapp-pod
+  labels:
+    type: back-end
+    app: user-service
+spec:
+  containers:
+    - name: commentapp-pod
+      image: musty1406/commentapp:v001
+      ports:
+        - containerPort: 9090
+      env:
+        - name: SERVERPORT
+          value: "9090"
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: commentapp-takim1
+  labels:
+    group: comment-app-dev
+    takim: takim-1
+spec:
+  containers:
+    - name: commentapp-pod
+      image: musty1406/commentapp:v001
+      ports:
+        - containerPort: 9090
+      env:
+        - name: SERVERPORT
+          value: "9090"
+
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: commentapp-takim2
+  labels:
+    group: comment-app-dev
+    takim: takim-2
+spec:
+  containers:
+    - name: commentapp-pod
+      image: musty1406/commentapp:v001
+      ports:
+        - containerPort: 9090
+      env:
+        - name: SERVERPORT
+          value: "9090"

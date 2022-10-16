@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      database: postgresql-jme
+  template:
+    metadata:
+      labels:
+        database: postgresql-jme
+    spec:
+      containers:
+        - name: postgresql-jme-container
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql-jme-secret
+                  key: POSTGRES_PASSWORD
+    

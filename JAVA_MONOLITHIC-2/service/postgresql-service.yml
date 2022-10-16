@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql-service
+spec:
+  type: LoadBalancer
+  selector:
+    database: postgresql-jme
+  ports:
+    - port: 1212
+      targetPort: 5432

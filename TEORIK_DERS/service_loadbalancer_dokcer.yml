@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-loadbalancer
+spec:
+  selector:
+    app: user-service
+  type: LoadBalancer
+  ports:
+    - name: tcpdocker
+      port: 11223
+      targetPort: 9090
+#    - name: tcpuser
+#      port: 11224
+#      targetPort: 9091
+#    - name: tcpauth
+#      port: 11225
+#      targetPort: 9092

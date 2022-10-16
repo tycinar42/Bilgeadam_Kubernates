@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: commentapp-deployment
+  labels:
+    type: deploy-commentapp
+spec:
+  selector:
+    matchLabels:
+      app: commentapp-deployement
+      service: commentservice
+  template:
+    metadata:
+      labels:
+        app: commentapp-deployement
+        service: commentservice
+    spec:
+      containers:
+        - name: commentapp-container
+          image: tycinar42/commentapp:v004
+          ports: 
+           - containerPort: 9090 
+             name: tcpcommentapp
+          env:
+            - name: url
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: DBURL
+            - name: user
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: DBUSER                 
+            - name: password
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: DBPASSWORD   
+            - name: server-port
+              valueFrom:
+                secretKeyRef:
+                  name: mysecret
+                  key: SERVER_PORT      
+

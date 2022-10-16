@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-postgresql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      database: postgresql
+      service: commentservice
+  template:
+    metadata:
+      labels:
+        database: postgresql
+        service: commentservice
+    spec:
+      containers:
+        - name: postgre-container
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+              name: tcppostgre
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "root"

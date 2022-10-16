@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-monolithic-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-monolithic-deployment
+  template:
+    metadata:
+      labels:
+        app: java-monolithic-deployment
+    spec:
+      containers:
+        - name: java-monolithic-container
+          image: tycinar42/javamonolithicexample:v002
+          ports:
+            - containerPort: 9090
+          env:
+            - name: server-port
+              valueFrom:
+                secretKeyRef:
+                  name: java-monolithic-secret
+                  key: SERVER_PORT
+            - name: url
+              valueFrom:
+                secretKeyRef:
+                  name: java-monolithic-secret
+                  key: DBURL
+            - name: user
+              valueFrom:
+                secretKeyRef:
+                  name: java-monolithic-secret
+                  key: DBUSER
+            - name: password
+              valueFrom:
+                secretKeyRef:
+                  name: java-monolithic-secret
+                  key: DBPASSWORD

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  ymldeployment
+  labels:
+    type: deploy-back-end
+    app: user-service-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      name: ymlpodcreate
+      labels:
+        type: back-end
+        app: user-service
+      annotations:
+        owner: "Taha Yasin CINAR"
+        type: "backend-service"
+        create: "13.10.2022 09:18"
+        iletisim: "0 555 555 55 55"
+        email: "yasin@gmail.com"
+    spec:
+      containers:
+      - name: ymlpodcreate
+        image:  tycinar42/dockerdeneme:v003
+        ports:
+          - containerPort: 9090
+        env:
+          - name: DBURL
+            valueFrom:
+              secretKeyRef:
+                name: secret-myproject
+                key: DBURL
+          - name: DBUSER
+            valueFrom:
+              secretKeyRef:
+                name: secret-myproject
+                key: DBUSER
+          - name: DBPASS
+            valueFrom:
+              secretKeyRef:
+                name: secret-myproject
+                key: DBPASS
+

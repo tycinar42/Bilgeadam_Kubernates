@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-monolithic-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: java-monolithic-deployment
+  ports:
+    - port: 9096
+      targetPort: 9090
+
+
+
