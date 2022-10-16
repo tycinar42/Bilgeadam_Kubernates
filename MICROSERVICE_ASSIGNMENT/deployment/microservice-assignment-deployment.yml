@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-assignment-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-assignment
+  template:
+    metadata:
+      labels:
+        app: microservice-assignment
+    spec:
+      containers:
+        - name: microservice-assignment-container
+          image: tycinar42/microserviceassignment:v002
+          ports:
+            - containerPort: 9090
